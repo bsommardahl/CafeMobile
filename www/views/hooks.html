@@ -1,0 +1,23 @@
+﻿<h1>Event Hooks</h1>
+<hr/>
+
+<table class="wideTable">
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>POST URL</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: Hooks">
+        <tr>
+            <td><span data-bind="html: EventName"></span></td>
+            <td><span data-bind="html: PostUrl"></span></td>
+            <td><button class='btn btn-danger btn-small' data-bind="click: $parent.Delete">Eliminar</button></td>     
+        </tr>
+    </tbody>   
+</table>
+
+<hr/>
+<button class="btn btn-primary" data-bind="click: Create">Crear Nuevo Hook</button>
+

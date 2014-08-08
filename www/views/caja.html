@@ -1,0 +1,71 @@
+﻿<div data-bind="with: StartOrderView">
+	<div>
+		<input data-bind="value: CustomerName, valueUpdate: 'afterkeydown'" class="largeText" placeholder="Nombre de Cliente"/>
+		<button class="btn btn-large" data-bind="tap: StartOrder, css: { CustomerName: 'btn-sucess' }">
+			Empezar Orden
+		</button>
+	</div>
+</div>
+
+<div data-bind="with: OrdersView">
+
+	<div data-bind="visible: CurrentView()=='orders'">
+		<div data-bind="if: Orders().length > 0">
+			<h3 class='changeViewLink'><button class='btn' data-bind="tap: SwitchView"> Vista de Productos Pendientes</button></h3>
+			<h3>Ordenes Abiertos</h3>
+			<div data-bind="foreach: Orders" class="orders">
+				<div class="order">
+
+					<button data-bind="tap: $parent.Select, css: { 'btn-primary': HasUndeliveredItems, 'btn-success': !HasUndeliveredItems() }" class="btn btn-large" >
+
+						<span class="customerName" data-bind="html: CustomerName"></span>
+						<br />
+						<span data-bind="html: CreatedDate"></span>
+						<br />
+						<span data-bind="html: CreatedTime"></span>
+						<br />
+						<span>L<span data-bind="html: Total"></span></span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div data-bind="visible: CurrentView()=='products'">
+		<h3 class='changeViewLink'><button class='btn' data-bind="tap: SwitchView"> Vista de Ordenes Abiertos</button></h3>
+		<h3>Productos Pendientes</h3>
+		<div data-bind="visible: OrdersOfProduct().length>0" class="ordersOfProduct">
+			<h3 data-bind="html: SelectedProductTag() + ': ' + SelectedProduct()"></h3>
+			<div data-bind="foreach: OrdersOfProduct">
+				<div class="order">
+
+					<button data-bind="tap: $parent.Select, css: { 'btn-primary': HasUndeliveredItems, 'btn-success': !HasUndeliveredItems() }" class="btn btn-large" >
+
+						<span class="customerName" data-bind="html: CustomerName"></span>
+						<br />
+						<span data-bind="html: CreatedDate"></span>
+						<br />
+						<span data-bind="html: CreatedTime"></span>
+						<br />
+						<span>L<span data-bind="html: Total"></span></span>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div data-bind="foreach: Products" class="orders">
+
+			<div class="order">
+
+				<button data-bind="tap: $parent.SelectProduct, css: { 'btn-primary': Pending>0, 'btn-success': Pending==0 }" class="btn btn-large">
+
+					<span class="customerName" data-bind="html: Item.Name"></span>
+					<br />
+					<span>Entregados <span data-bind="html: Delivered"></span></span>
+					<br />
+					<span>Pendientes <span data-bind="html: Pending"></span></span>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

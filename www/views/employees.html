@@ -1,0 +1,59 @@
+﻿<h1>Empleados</h1>
+<hr/>
+
+<div data-bind="foreach: Employees">
+	<span class="employeeButton">
+		<button class="btn btn-large btn-primary" data-bind="click: $parent.SelectEmployee"><span data-bind="html: Name"></span></button>
+	</span>
+</div>
+
+<hr/>
+<table>
+	<tr>
+		<td>Start Date:
+		<input class='span2' data-bind="value: StartDate"/>
+		</td>
+		<td>End Date:
+		<input class='span2' data-bind="value: EndDate"/>
+		</td>
+		<td>
+		<button class='btn' data-bind="click: RunReport">
+			Run Report
+		</button></td>
+	</tr>
+</table>
+
+<table class="wideTable">
+	<thead>
+		<tr>
+			<th>Empleado</th>
+			<th>Fecha</th>
+			<th>Llegada</th>
+			<th>Salida</th>
+			<th>Horas</th>
+		</tr>
+	</thead>
+	<tbody data-bind="foreach: Times">
+		<tr>
+			<td><span data-bind="html: Name"></span></td>
+			<td><span data-bind="html: Date"></span></td>
+			<td><span data-bind="html: TimeIn"></span></td>
+			<td><span data-bind="html: TimeOut"></span></td>
+			<td><span data-bind="html: Hours"></span></td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>Total: </td>
+			<td><span data-bind="html: TotalHours"></span></td>
+		</tr>
+	</tfoot>
+</table>
+<hr/>
+<button class="btn" data-bind="click: CreateNewEmployee">
+	Crear Nuevo Empleado
+</button>
+

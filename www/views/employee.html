@@ -1,0 +1,46 @@
+﻿<button class="btn btn-primary btn-large" data-bind="click: GoBack">Volver</button>
+
+<div class="row-fluid">
+
+    <div class="span8">
+        <h3><span data-bind="html: Name"></span></h3>
+        
+        <table class="wideTable" data-bind="visible: Times().length > 0">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Llegar</th>
+                    <th>Salir</th>
+                    <th>Horas</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: Times">
+                <tr>
+                    <td><span data-bind="html: Date"></span></td>
+                    <td><span data-bind="html: TimeIn"></span></td>
+                    <td><span data-bind="html: TimeOut"></span></td>
+					<td><span data-bind="html: Hours"></span></td>
+					<td><button class="btn btn-danger btn-small" data-bind="visible: _id && $parent.CanDeleteTimeEntries, click: $parent.DeleteTimeEntry">X</button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Total Horas</td>
+                    <td><span data-bind="html: TotalHours"></span></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="span4">
+        <h3>Tasks</h3>    
+        <p><button class="btn btn-primary btn-large" data-bind="click: EnterNewTime">Entrar Horas</button></p>
+        <p><button class="btn btn-danger" data-bind="click: Delete">Eliminar Empleado</button></p>
+        <p><button class="btn" data-bind="visible: !CanDeleteTimeEntries(), click: EnterDeleteMode">Eliminar Horas</button></p>                       
+    </div>
+    
+</div>

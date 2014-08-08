@@ -1,0 +1,25 @@
+﻿<dl>
+    <dt>Fecha</dt>
+    <dd><span class='largeText' data-bind="html: Date"></span>
+    	<button class='btn btn-large' data-bind="click: AddDay">+</button>
+    	<button class='btn btn-large' data-bind="click: SubtractDay">-</button>
+    </dd>
+</dl>
+            
+<dl>
+    <dt>Llegar</dt>
+    <dd><select class='timeEntry' data-bind="options: Hours, value: SelectedArrivalHour"></select><span class='largeText'>:</span>
+    	<select class='timeEntry' data-bind="options: Minutes, value: SelectedArrivalMinutes"></select>
+    	<select class='timeEntry' data-bind="options: AmPm, value: SelectedArrivalAmPm"></select>
+</dl>
+            
+<dl>
+    <dt>Salir</dt>
+    <dd><select class='timeEntry' data-bind="options: Hours, value: SelectedDepartureHour"></select><span class='largeText'>:</span>
+    	<select class='timeEntry' data-bind="options: Minutes, value: SelectedDepartureMinutes"></select>
+    	<select class='timeEntry' data-bind="options: AmPm, value: SelectedDepartureAmPm"></select>
+</dl>
+
+<h3><span data-bind="html: CalculatedHours"></span> Horas</h3>
+            
+<button class='btn btn-primary' data-bind="click: Save">Ingresar</button>

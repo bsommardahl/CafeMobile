@@ -1,0 +1,53 @@
+﻿<h1>Gastos</h1>
+<hr/>
+
+<table>
+	<tr>
+		<td>Start Date: <input class='span2' data-bind="value: StartDate"/></td>
+		<td>End Date: <input class='span2' data-bind="value: EndDate"/></td>
+		<td><button class='btn' data-bind="click: RunReport">Run Report</button></td>
+	</tr>
+</table>
+
+<hr/>
+
+<table class="wideTable">
+    <thead>
+        <tr>
+            <th>Vendador</th>
+            <th>Descripcion</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Gastado</th>
+            <th>ISV</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: Debits">
+        <tr>
+            <td><span data-bind="html: VendorName"></span></td>
+            <td><span data-bind="html: Description"></span></td>
+            <td><span data-bind="html: DebitDate"></span></td>
+            <td><span data-bind="html: DebitTime"></span></td>
+            <td><span data-bind="html: Amount"></span></td>       
+            <td><span data-bind="html: TaxPaid"></span></td>       
+            <td><button class="btn btn-small" data-bind="click: $parent.SelectDebit">View</button></td>
+            <!-- <td><button class='btn btn-danger btn-small' data-bind="click: $parent.DeleteDebit">Eliminar</button></td>      -->
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Totales: </td>
+            <td><span data-bind="html: Total"></span></td>  
+            <td><span data-bind="html: TotalTax"></span></td>  
+            <td></td>          
+        </tr>
+    </tfoot>
+</table>
+
+<hr/>
+<button class="btn btn-primary" data-bind="click: CreateNewDebit">Crear Nuevo Gasto</button>
+

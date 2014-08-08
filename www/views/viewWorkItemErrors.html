@@ -1,0 +1,18 @@
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>ResponseText</th>
+				<th>Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr data-bind="foreach: Errors">
+				<td><span data-bind="error.status"></span></td>
+				<td><span data-bind="error.responseText"></span></td>
+				<td><span data-bind="date"></span></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

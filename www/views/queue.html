@@ -1,0 +1,85 @@
+<h1>Queue
+<button class='btn' data-bind="click: Stop, visible: IsPolling">
+	Stop Polling
+</button>
+<button class='btn' data-bind="click: Start, visible: !IsPolling() && IsConnected()">
+	Start Polling
+</button></h1>
+<hr/>
+
+<div data-bind="visible: WorkingWorkItems().length>0">
+	<h3>In Progress...</h3>
+	<table class="wideTable" >
+		<thead>
+			<tr>
+				<th>Type</th>
+				<th>Collection</th>
+				<th>Item</th>
+				<th>Attempts</th>
+				<th>Created</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody data-bind="foreach: WorkingWorkItems">
+			<tr>
+				<td><span data-bind="html: Type"></span></td>
+				<td><span data-bind="html: Collection"></span></td>
+				<td>				<textarea data-bind="html: Item" readonly="readonly"></textarea></td>
+				<td><span data-bind="html: Attempts"></span></td>
+				<td><span data-bind="html: Created"></span></td>
+				<td><img src='img/ajax-loader-white.gif'/></td>
+			</tr>
+		</tbody>
+	</table>
+	<hr/>
+</div>
+
+<div data-bind="visible: PendingWorkItems().length>0">
+	<table class="wideTable" >
+		<thead>
+			<tr>
+				<th>Type</th>
+				<th>Collection</th>
+				<th>Item</th>
+				<th>Attempts</th>
+				<th>Created</th>				
+			</tr>
+		</thead>
+		<tbody data-bind="foreach: PendingWorkItems">
+			<tr>
+				<td><span data-bind="html: Type"></span></td>
+				<td><span data-bind="html: Collection"></span></td>
+				<td><textarea data-bind="html: Item" readonly="readonly"></textarea></td>
+				<td><span data-bind="html: Attempts, click: $parent.viewErrors"></span></td>
+				<td><span data-bind="html: Created"></span></td>				
+			</tr>
+		</tbody>
+	</table>
+	<hr/>
+</div>
+
+<h3>Sync Data with Server</h3>
+<!-- <button class='btn' data-bind="click: Push">
+	Soft Push
+</button> -->
+<button class='btn' data-bind="click: Pull">
+	Reset This Device to Server 
+</button>
+<button class='btn' data-bind="click: ClearQueue">
+	Clear Queue 
+</button>
+<button class='btn' data-bind="click: HardPush">
+	Hard Push
+</button>
+<!-- <hr/>
+<h3>Backup/Restore Local Data</h3>
+<button class='btn' data-bind="click: Backup">
+	Backup
+</button>
+<button class='btn' data-bind="click: Restore">
+	Restore
+</button> -->
+
+<hr/>
+
+<p data-bind="html: Status"></p>

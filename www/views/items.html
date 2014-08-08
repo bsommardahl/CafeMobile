@@ -1,0 +1,34 @@
+﻿<h1>Productos</h1>
+<hr/>
+<select data-bind="options: Tags, optionsText: 'Name', value: SelectedTag, optionsCaption: 'All'"></select>
+<button data-bind="click: FilterByTag" class='btn'>Filtrar</button>
+
+<style type="text/css">
+	.tabular {width: 100%}
+	.tabular thead tr th {text-align: left; background-color: #CCCCCC; }
+	.tabular tbody tr td {border-bottom: #CCCCCC solid 1px;}
+</style>
+<table class='tabular'>
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Tags</th>
+            <th>Precio</th>
+            <th>ISV</th>
+            <th>Total</th>
+            <th>Orden de Lista</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: Items">
+        <tr>
+            <td><a data-bind="click: $parent.SelectItem"><span data-bind="html: Name"></span></a></td>
+            <td><span data-bind="html: Tag"></span></td>
+            <td><span data-bind="html: Price"></span></td>
+            <td><span data-bind="html: TaxRate"></span></td>
+            <td><span data-bind="html: parseInt(((1+parseFloat(TaxRate))*parseFloat(Price))*1000)/1000"></span></td>
+            <td><span data-bind="html: Priority"></span></td>            
+        </tr>
+    </tbody>       
+</table>
+<hr/>
+<button class='btn' data-bind="tap: CreateNewProduct">Crear Nuevo Producto</button>

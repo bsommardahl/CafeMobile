@@ -1,0 +1,44 @@
+﻿<h1>Ventas</h1>
+<hr/>
+
+<table>
+	<tr>
+		<td>Start Date: <input class='span2' data-bind="value: Start"/></td>
+		<td>End Date: <input class='span2' data-bind="value: End"/></td>
+		<td><button class='btn' data-bind="click: RunReport">Run Report</button></td>		
+	</tr>
+</table>
+
+<hr/>
+<table class="wideTable">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Pagado</th>
+            <th>ISV</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: Orders">
+        <tr>
+            <td><span data-bind="html: CustomerName"></span></td>
+            <td><span data-bind="html: PaidDate"></span></td>
+            <td><span data-bind="html: PaidTime"></span></td>
+            <td><span data-bind="html: AmountPaid"></span></td>
+            <td><span data-bind="html: TaxPaid"></span></td>
+            <td><button class="btn btn-small" data-bind="click: SelectOrder">View</button></td>
+        </tr>    
+    </tbody>
+    <tfoot>
+    	<tr>
+    		<td></td>
+    		<td></td>
+    		<td class='total'>Total:</td>
+    		<td><span data-bind="html: TotalPaid"></span></td>
+    		<td><span data-bind="html: TotalTaxPaid"></span></td>
+    		<td></td>
+    	</tr>
+    </tfoot>
+</table>

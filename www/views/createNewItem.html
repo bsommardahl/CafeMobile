@@ -1,0 +1,32 @@
+﻿<div>
+    <dl>
+        <dt>Name</dt>
+        <dd>
+            <input data-bind="value: Name" /></dd>
+    </dl>
+
+    <dl>
+        <dt>Price</dt>
+        <dd>
+            <input data-bind="value: Price" /></dd>
+    </dl>
+
+    <dl>
+        <dt>Tag</dt>
+        <dd>
+            <select data-bind="options: AvailableTags, optionsText: 'Name', value: SelectedTag, optionsCaption: 'Choose one...'"></select></dd>
+    </dl>
+
+    <dl>
+        <dt>Image Source</dt>
+        <dd>
+            <input data-bind="value: ImageSrc" /></dd>
+    </dl>
+
+    <dl>
+        <dt>List Order</dt>
+        <dd>
+            <input data-bind="value: Priority" /></dd>
+    </dl>
+</div>
+<button data-bind="click: Save">Create</button>

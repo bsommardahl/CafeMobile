@@ -1,0 +1,70 @@
+﻿<div data-bind="visible: !Order.Paid(), with: Products" class="span7">
+	<h3>Productos:</h3>
+
+	<p data-bind="visible: !IsViewingTags()">
+		<button data-bind="tap: LoadTags" class="btn btn-primary btn-large">
+			Volver
+		</button>
+	</p>
+
+	<div data-bind="foreach: Items">
+		<button data-bind="tap: Select" class="btn btn-large btn-success product">
+			<span data-bind="html: Name"></span>
+		</button>
+	</div>
+</div>
+
+<div data-bind="with: Order" class="span4">
+
+	<h3><span data-bind="html: CustomerName, click: CorrectCustomerName"></span>:</h3>
+
+	<div class='register_totals'>
+		<p>Sub Total: L<span data-bind="html: SubTotal"></span></p>
+		<p>ISV: L<span data-bind="html: TaxAmount"></span></p>			
+		<p><strong>Total: L<span data-bind="html: Total"></span></strong></p>
+	</div>
+	
+	<table class='wideTable'>
+		<tr>
+			<td>
+			<button class="btn btn-primary btn-large" data-bind="tap: Pay, visible: !Paid() && Total()>0">
+				Pagar
+			</button></td>
+			<td>
+			<button class="btn btn-large" data-bind="tap: Save, visible: Total()>0">
+				Guardar
+			</button></td>
+			<td>
+			<button class="btn btn-large btn-danger" data-bind="tap: DeleteOrder, visible: !HasDeliveredItems() && !Paid()">
+				Borrar
+			</button>
+			</td>
+		</tr>
+	</table>
+
+	<table class="wideTable">
+		<tbody class="orderItems" data-bind="foreach: Items">
+			<tr>
+				<td data-bind="html: Name"></td>
+				<td data-bind="html: 'L' + Price"></td>
+				<td>&nbsp;</td>
+				<td>
+				<button data-bind="tap: $parent.UndeliverItem, visible: Delivered" class="btn btn-small">
+					Desentregar
+				</button>
+				<button data-bind="tap: $parent.DeliverItem, visible: !Delivered()" class="btn btn-small btn-success">
+					Entregar
+				</button></td>
+				<td>
+				<button data-bind="tap: $parent.RemoveItem, visible: !Delivered() && !$parent.Paid()" class="btn btn-danger btn-small">
+					Borrar
+				</button></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<button class="btn btn-large" data-bind="tap: PrintReceipt, visible: Paid()">
+		Imprimir Factura
+	</button>
+			
+</div>

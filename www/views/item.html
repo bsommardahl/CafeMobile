@@ -1,0 +1,99 @@
+﻿<button class="btn btn-primary btn-large" data-bind="click: GoBack">Volver</button>
+
+<h3>Producto</h3>
+
+<div class="row-fluid">
+
+	<div class="span8">
+		<dl>
+			<dt>
+				Name
+			</dt>
+			<dd>
+				<span data-bind="html: Name"></span>
+			</dd>
+		</dl>
+
+		<dl>
+			<dt>
+				Price
+			</dt>
+			<dd>
+				<span data-bind="html: Price"></span>
+			</dd>
+		</dl>
+
+		<dl>
+			<dt>
+				Tax Rate (%)
+			</dt>
+			<dd>
+				<span data-bind="html: TaxRate"></span>
+			</dd>
+		</dl>
+
+		<dl>
+			<dt>
+				Tag
+			</dt>
+			<dd>
+				<span data-bind="html: Tag"></span>
+			</dd>
+		</dl>
+
+		<dl data-bind="visible: ImageSrc">
+			<dt>
+				Image Source
+			</dt>
+			<dd>
+				<span data-bind="html: ImageSrc"></span>
+			</dd>
+		</dl>
+
+		<dl>
+			<dt>
+				List Order
+			</dt>
+			<dd>
+				<span data-bind="html: Priority"></span>
+			</dd>
+		</dl>
+	</div>
+
+	<div class="span4">
+		<h3>Tasks</h3>
+		<div>
+			<button class='btn' data-bind="click: CorrectName">
+				Correct Misspelled Name
+			</button>
+		</div>
+		<div>
+			<button class='btn' data-bind="click: ChangeTaxRate">
+				Change Tax Rate
+			</button>
+		</div>
+		<div>
+			<button class='btn' data-bind="click: ChangePrice">
+				Change Price
+			</button>
+		</div>
+		<div>
+			<button class='btn' data-bind="click: ChangeTag">
+				Change Tag
+			</button>
+		</div>
+		<!--<div><button data-bind="click: ChangeImageSrc">Change Image Source</button></div>-->
+		<div>
+			<button class='btn' data-bind="click: ReOrderProduct">
+				Change List Order
+			</button>
+		</div>
+		<div>
+			<button class='btn' data-bind="click: ArchiveProduct">
+				Archive Product
+			</button>
+		</div>
+
+	</div>
+
+</div>

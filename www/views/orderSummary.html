@@ -1,0 +1,72 @@
+﻿<div class='row-fluid'>
+	<div class='span7'>
+		<h4><span data-bind="html: CustomerName"></span></h4>
+	</div>
+
+	<div class='span5'>
+		<table>
+			<tr>
+				<td> Created: </td>
+				<td><b><span data-bind="html: CreatedDate"></span></b></td>
+			</tr>
+			<tr>
+				<td> Paid: </td>
+				<td>
+				<div data-bind="visible: !IsChangingPaidDate(), click: ChangePaidDate">
+					<b><span data-bind="html: PaidDate"></span></b>
+				</div>
+				<div data-bind="visible: IsChangingPaidDate" style='display: none'>
+					<input data-bind="value: Paid" style='width: 150px'/><br/>
+					<button data-bind="click: SavePaidDateChange">
+						Change
+					</button>
+					<button data-bind="click: CancelPaidDateChange">
+						Cancel
+					</button>
+				</div></td>
+			</tr>
+		</table>
+	</div>
+</div>
+<br/>
+<table class="wideTable">
+	<thead>
+		<tr>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody data-bind="foreach: Items">
+		<tr>
+			<td><span data-bind="html: Name"></span></td>
+			<td><span data-bind="html: Tag"></span></td>
+			<td><span data-bind="html: Price"></span></td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td></td>
+			<td>Total Venta:</td>
+			<td><span data-bind="html: Total"></span></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>ISV:</td>
+			<td><span data-bind="html: TaxPaid"></span></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>Total Pagado:</td>
+			<td><span data-bind="html: AmountPaid"></span></td>
+		</tr>
+	</tfoot>
+</table>
+<hr/>
+<button data-bind="click: DeleteOrder" class='btn btn-danger'>
+	Delete This Order
+</button>
+
+<button data-bind="click: ReprintReceipt" class='btn'>
+	Imprimir Factura
+</button>

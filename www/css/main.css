@@ -1,0 +1,63 @@
+﻿.notPolling { background-color: yellow; position: absolute; top: 10px; right: 0px; padding-right: 10px; padding-left: 10px; }
+.tag {
+    background-color: #EEEEEE;
+    border: 1px solid #CCCCCC;
+    margin-bottom: 10px;
+    padding: 5px;
+    text-align: center;
+}
+
+.ordersOfProduct .order, .orders .order { padding: 0 10px 10px 0; float: left; position: relative;}
+
+.ordersOfProduct { position: relative; float: right; width: 300px; padding: 20px; margin: 20px; background-color: #EEEEEE; border: #CCCCCC solid 2px; }
+
+.orderItem { margin-bottom: 10px; }
+
+.changeViewLink { float: right; width: 400px; text-align: right; margin-top: 0px; }
+
+.largeText {
+    font-size: 2em;
+    width: 300px;
+}
+
+.product {
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+/*::-webkit-input-placeholder { padding-top: 5px; }*/
+
+.orderListing {
+    background-color: #EEEEEE;
+    border: #CCCCCC solid 1px;
+    margin-bottom: 10px;
+    padding: 5px;
+    text-align: center;
+}
+
+.orderListing .customerName {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#loading {
+    display: none;
+    z-index: 2000;
+    margin-top: 10px;    
+}
+
+.wideTable { width: 100%; margin-bottom: 10px; }
+.wideTable thead { background-color: #CCCCCC;}
+.wideTable thead tr th {text-align: left;}
+.wideTable tfoot { background-color: #DDDDDD;}
+.wideTable tfoot td { font-weight: bold; }
+.wideTable tfoot td.total { text-align: right; }
+.wideTable tbody td { vertical-align: top; }
+
+tbody.orderItems tr td { padding-bottom: 5px; padding-top: 5px; border-bottom: #CCCCCC solid 1px; }
+
+.employeeButton { padding-right: 20px;}
+
+select.timeEntry { width: 80px;  font-size: 1.8em; }
+
+.register_totals { background-color: #EEEEEE; padding: 10px; border: #CCCCCC solid 1px; margin-bottom: 10px; font-size: 1.1em }

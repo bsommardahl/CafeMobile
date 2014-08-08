@@ -1,0 +1,59 @@
+<div class='row-fluid'>
+	<table>
+		<tr>
+			<td> Ingresado: </td>
+			<td data-bind="visible: !modifying()">
+				<b><span data-bind="html: CreatedDate"></span></b>
+			</td>
+			<td data-bind="visible: modifying">
+				<input data-bind="value: CreatedDate" style='width: 150px'/><br/>				
+			</td>
+		</tr>
+		<tr>
+			<td> Vendor: <Ftd>
+			<td><b><span data-bind="html: VendorName"></span></b></td>
+		</tr>
+		<tr>
+			<td> Amount: </td>
+			<td data-bind="visible: !modifying()">
+				<b><span data-bind="html: Amount"></span></b></td>				
+			</td>
+			<td data-bind="visible: modifying">
+				<input data-bind="value: Amount" style='width: 150px'/><br/>				
+			</td>		
+		</tr>
+		<tr>
+			<td> Tax Paid: </td>
+			<td data-bind="visible: !modifying()"><b>
+				<span data-bind="html: TaxPaid"></span></b></td>				
+			</td>
+			<td data-bind="visible: modifying">
+				<input data-bind="value: TaxPaid" style='width: 150px'/><br/>				
+			</td>		
+		</tr>
+		<tr>
+			<td> Description: </td>
+			<td data-bind="visible: !modifying()"><b>
+				<span data-bind="html: Description"></span></b></td>				
+			</td>
+			<td data-bind="visible: modifying">
+				<input data-bind="value: Description" style='width: 150px'/><br/>				
+			</td>		
+		</tr>			
+		<tr>
+			<td>Operational Expense: </td>
+			<td><b><span data-bind="html: OperationalExpense"></span></b></td>
+		</tr>			
+	</table>	
+</div>
+<hr/>
+<button data-bind="visible: modifying, click: SaveChanges" class='btn btn-warning'>
+	Save Changes
+</button>
+<button data-bind="visible: !modifying(), click: Modify" class='btn btn-info'>
+	Modify
+</button>
+
+<button data-bind="visible: !modifying(), click: DeleteDebit" class='btn btn-danger'>
+	Delete This Debit
+</button>

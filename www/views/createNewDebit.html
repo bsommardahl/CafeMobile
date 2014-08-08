@@ -1,0 +1,22 @@
+﻿
+<dl>
+    <dt>Vendador</dt>
+    <dd><select data-bind="options: Vendors, optionsText: 'Name', value: SelectedVendor, optionsCaption: 'Choose one...'"></select></dd>
+</dl>
+
+<dl>
+    <dt>Descripcion</dt>
+    <dd><textarea data-bind="value: Description"></textarea></dd>
+</dl>
+
+<dl>
+    <dt>ISV Pagado</dt>
+    <dd><input data-bind="value: TaxPaid"/></dd>
+</dl>
+
+<dl>
+    <dt>Total (con ISV)</dt>
+    <dd><input data-bind="value: Amount"/></dd>
+</dl>
+
+<button data-bind="click: Save" class="btn btn-primary">Ingresar</button>
