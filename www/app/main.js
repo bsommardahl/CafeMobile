@@ -90,10 +90,13 @@ require(["viewModelUpdater", "localStore", "dataContext", "config", "router", "m
 	if (window.device) {
 
 		document.addEventListener("deviceready", function() {
-			document.addEventListener("online", function() {
+			console.log("deviceready");
+			document.addEventListener("online", function() {				
+				console.log("online");
 				local.Connect();
 			}, false);
 			document.addEventListener("offline", function() {
+				console.log("offline");
 				local.Disconnect();
 			}, false);
 		}, false);
