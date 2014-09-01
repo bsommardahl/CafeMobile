@@ -79,14 +79,14 @@
 		<script src="js/bootstrap.js"></script>
 		<script src="js/knockout-2.2.0.js"></script>
 		<script src="js/html5datepicker.binding.knockout.js"></script>
-		<script type='application/javascript' src='/js/fastclick.js'></script>
+		<script src='js/fastclick.js' type='application/javascript'></script>
 		<script src="js/require.js" data-main="app/main"></script>
 
 		<script type="text/javascript">
 			$(function() {
 			    FastClick.attach(document.body);
 			});
-			
+
 			requirejs.onError = function(err) {
 				alert(err.requireType);
 				if (err.requireType === 'timeout') {
