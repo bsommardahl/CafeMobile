@@ -51,9 +51,10 @@
 		getOrder();
 
 		var deleteOrder = function() {
-			if (confirm("Estas seguro? " + orderId)) {
+			if (confirm("Estas seguro?")) {
+				console.log("Deleting order " + orderId);
 				dc.Orders.Delete(orderId).done(function() {
-					alert("done deleting.");
+					console.log("done deleting order " + orderId);
 					if (callback)
 						callback();
 				});
