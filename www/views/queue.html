@@ -53,7 +53,7 @@
 				<td><textarea data-bind="html: Item" readonly="readonly"></textarea></td>
 				<td><span data-bind="html: Attempts, click: $parent.viewErrors"></span></td>
 				<td><span data-bind="html: Created"></span></td>	
-				<td><span data-bind="visible: Attempts() > 20">				
+				<td><span data-bind="visible: Attempts > 20">				
 					<button class="btn btn-sm btn-warning" data-bind="click: $parent.deleteWorkItem">Delete</button>
 				</span></td>
 			</tr>
