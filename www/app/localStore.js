@@ -180,6 +180,7 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 	};
 
 	var remove = function(collection, query, skipQueue) {
+		console.log("Removing item from " + collection + " collection:");
 		var list = getCollection(collection);
 		var removedItems = [];
 		$.each(list, function() {
@@ -196,8 +197,7 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 			}
 		});
 		if (removedItems.length == 0) {
-			if (debugMode)
-				console.log("No work done.");
+			console.log("No work done.");
 			return $.Deferred().resolve();
 		} else {
 			var str = JSON.stringify(list);
@@ -315,7 +315,7 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 				});
 			}
 		},
-		Remove: function(workItemId){
+		RemoveWorkItem: function(workItemId){
 			queue.RemoveWorkItem(workItemId);
 		},
 		ClearQueue: function(){
