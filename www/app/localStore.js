@@ -315,6 +315,9 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 				});
 			}
 		},
+		Remove: function(workItemId){
+			queue.RemoveWorkItem(workItemId);
+		},
 		ClearQueue: function(){
 			queue.Clear();
 		},

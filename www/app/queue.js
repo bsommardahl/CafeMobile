@@ -344,6 +344,9 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 		SetOnQueueChange : function(cb) {
 			onQueueChange = cb;
 		},
+		RemoveWorkItem: function(id){
+			queue.splat(id);
+		},
 		Connect : connect,
 		Disconnect : disconnect,
 		IsPolling : isPolling,

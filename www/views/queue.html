@@ -24,7 +24,7 @@
 			<tr>
 				<td><span data-bind="html: Type"></span></td>
 				<td><span data-bind="html: Collection"></span></td>
-				<td>				<textarea data-bind="html: Item" readonly="readonly"></textarea></td>
+				<td><textarea data-bind="html: Item" readonly="readonly"></textarea></td>
 				<td><span data-bind="html: Attempts"></span></td>
 				<td><span data-bind="html: Created"></span></td>
 				<td><img src='img/ajax-loader-white.gif'/></td>
@@ -42,7 +42,8 @@
 				<th>Collection</th>
 				<th>Item</th>
 				<th>Attempts</th>
-				<th>Created</th>				
+				<th>Created</th>	
+				<th></th>			
 			</tr>
 		</thead>
 		<tbody data-bind="foreach: PendingWorkItems">
@@ -51,7 +52,11 @@
 				<td><span data-bind="html: Collection"></span></td>
 				<td><textarea data-bind="html: Item" readonly="readonly"></textarea></td>
 				<td><span data-bind="html: Attempts, click: $parent.viewErrors"></span></td>
-				<td><span data-bind="html: Created"></span></td>				
+				<td><span data-bind="html: Created"></span></td>	
+				<!-- <td><span data-bind="visible: Attempts() > 20"> -->
+				<td><span data-bind="visible: Attempts() > 20">
+					<button class="btn btn-sm btn-warning" data-bind="click: $parent.deleteWorkItem">Delete</button>
+				</span></td>
 			</tr>
 		</tbody>
 	</table>
