@@ -26,13 +26,16 @@
 				}, getHooks);
 			},
 			Init : function() {		
+				console.log("Initializing hooks...");
 				dc.Hooks.GetAll().done(function(list) {
 					$.each(list, function() {
 						var hook = this;
-						cafeEvents.addListener(hook.EventName, function(obj) {
-							if (obj)
+						cafeEvents.addListener(hook.EventName, function(obj) {							
+							if (obj){								
 								hookPoster.Post(hook.PostUrl, obj);
+							}							
 						});
+						console.log("Added event hook for " + hook.EventName + " to " + hook.PostUrl + ".");
 					});					
 				});
 			}
