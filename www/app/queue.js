@@ -91,17 +91,26 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 			return workItem;
 		},
 		splat : function(workItemId) {
+			console.log("Preparing to splat working item: " + workItemId);
+			
 			//splat is what should happen after a work item is completely done
 			var workingItems = getCollection(workingKey);
+			console.log("Total working items: " + workingItems.length);
+			
 			var workingItem = get(workingItems, function(item) {
 				return item._id == workItemId;
 			});
 
+			console.log("Found working item to splat: " + workingItem._id);
+
 			//remove working item from working queue
 			var index = workingItems.indexOf(workingItem);
+			console.log("Working item index: " + index);
 			workingItems.splice(index, 1);
+			console.log("Total working items: " + workingItems.length);
 			var newWorkingQueue = JSON.stringify(workingItems);
 			store.setItem(workingKey, newWorkingQueue);
+			console.log("Working item removed: " + workItemId);			
 			onQueueChange();
 		},
 		unPop : function(workItemId, error) {

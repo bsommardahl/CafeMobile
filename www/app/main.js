@@ -24,7 +24,6 @@ require(["viewModelUpdater", "localStore", "dataContext", "config", "router", "m
 				return false;
 			},
 			GoToSales : function() {
-				console.log("going to sales.");
 				router.GoToView.Sales();
 				return false;
 			},

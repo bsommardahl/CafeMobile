@@ -27,7 +27,9 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 
 		var deleteWorkItem = function(workItem){
 			if(confirm("Are you sure you want to remove this work item? This action could corrupt your database.")){
+				console.log("QueueVM.deleteWorkItem to localStore...");			
 				localStore.RemoveWorkItem(workItem._id);
+				console.log("Reloading work items after remove...");			
 				getPendingWorkItems();
 			}
 		};
