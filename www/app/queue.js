@@ -102,9 +102,9 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 			});	
 
 			if(!matchingItem){
-				var keyForQueue = queueKey;
-				var items = getCollection(keyForQueue);
-				var matchingItem = get(items, function(item) {
+				keyForQueue = queueKey;
+				items = getCollection(keyForQueue);
+				matchingItem = get(items, function(item) {
 					return item._id == workItemId;
 				});	
 			}
