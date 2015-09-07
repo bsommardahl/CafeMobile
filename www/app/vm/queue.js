@@ -27,6 +27,7 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 
 		var deleteWorkItem = function(workItem){			
 			console.log(workItem);				
+			console.log(this);				
 			if(confirm("Are you sure you want to remove this work item? This action could corrupt your database.")){
 				var item = JSON.parse(workItem.Item);
 				localStore.RemoveWorkItem(item._id);
