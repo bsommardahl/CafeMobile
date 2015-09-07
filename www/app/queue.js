@@ -93,24 +93,28 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 		splat : function(workItemId) {
 			//splat is what should happen after a work item is completely done
 
-			console.log("Preparing to splat working item: " + workItemId);
+			console.log("!! Preparing to splat working item: " + workItemId);
 
 			var keyForQueue = workingKey;
 			var items = getCollection(keyForQueue);
+			console.log("Item count in working queue: " + items.length);		
 			var matchingItem = get(items, function(item) {
-				return item._id == workItemId;
+				return item._id === workItemId;
 			});	
 
 			if(!matchingItem){
+				console.log("Item not found in working queue. Checking the pending queue...");
 				keyForQueue = queueKey;
 				items = getCollection(keyForQueue);
+				console.log("Item count in pending queue: " + items.length);
+				console.log(items[0]);
 				matchingItem = get(items, function(item) {
-					return item._id == workItemId;
-				});	
+					return item._id === workItemId;
+				});				
 			}
 		
 			if(!matchingItem){
-				alert("That work item was not found. No work was done.");
+				toast.error("That work item was not found. No work was done.");
 				return;
 			}
 			
