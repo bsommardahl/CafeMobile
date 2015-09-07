@@ -260,6 +260,7 @@
 				});
 			},
 			CreateFromCustomerName : function(customerName) {
+				console.log("Creating new order from customer name: " + customerName);
 				name(customerName);
 			},
 			CorrectCustomerName : function() {
