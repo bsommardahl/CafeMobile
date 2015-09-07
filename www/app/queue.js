@@ -101,6 +101,11 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 				return item._id == workItemId;
 			});
 
+			if(!workingItem){
+				alert("That work item was not found. No work was done.");
+				return;
+			}
+			
 			console.log("Found working item to splat: " + workingItem._id);
 
 			//remove working item from working queue
