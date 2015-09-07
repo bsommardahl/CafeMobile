@@ -109,15 +109,15 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 				});	
 			}
 		
-			if(!item){
+			if(!matchingItem){
 				alert("That work item was not found. No work was done.");
 				return;
 			}
 			
-			console.log("Found working item to splat: " + item._id);
+			console.log("Found working item to splat: " + matchingItem._id);
 
 			//remove working item from working queue
-			var index = items.indexOf(item);
+			var index = items.indexOf(matchingItem);
 			console.log("Working item index: " + index);
 			items.splice(index, 1);
 			console.log("Total working items: " + items.length);

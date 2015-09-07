@@ -51,11 +51,12 @@
 				<td><span data-bind="html: Type"></span></td>
 				<td><span data-bind="html: Collection"></span></td>
 				<td><textarea data-bind="html: Item" readonly="readonly"></textarea></td>
-				<td><span data-bind="html: Attempts, click: $parent.viewErrors"></span></td>
+				<td><span data-bind="html: Attempts"></span></td>
 				<td><span data-bind="html: Created"></span></td>	
-				<td><span data-bind="visible: Attempts > 20">				
-					<button class="btn btn-sm btn-warning" data-bind="click: $parent.deleteWorkItem">Delete</button>
-				</span></td>
+				<td><span data-bind="visible: Attempts > 10">				
+					<button class="btn btn-sm btn-warning" data-bind="click: $parent.deleteWorkItem">Delete</button></span>
+					<span data-bind="visible: Attempts > 0"><button class="btn btn-sm" data-bind="click: $parent.viewErrors">Errors</button></span>
+				</td>
 			</tr>
 		</tbody>
 	</table>
