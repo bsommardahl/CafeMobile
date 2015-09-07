@@ -26,10 +26,9 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 		var workingWorkItems = ko.observableArray();
 
 		var deleteWorkItem = function(workItem){			
-			console.log(this);				
+			console.log(workItem._id);				
 			if(confirm("Are you sure you want to remove this work item? This action could corrupt your database.")){
-				var item = JSON.parse(workItem.Item);
-				localStore.RemoveWorkItem(item._id);
+				localStore.RemoveWorkItem(workItem._id);
 				getPendingWorkItems();
 			}
 		};

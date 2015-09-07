@@ -92,7 +92,7 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 			console.log(items[0]);
 			console.log("Searching working queue for match...");
 			var matchingItem = get(items, function(item) {
-				return item.Item._id === workItemId;
+				return item._id === workItemId;
 			});	
 			if(matchingItem){
 				console.log("Found matching work item in working queue!");
@@ -105,7 +105,7 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 				console.log("First item in pending queue:");
 				console.log(items[0]);				
 				matchingItem = get(items, function(item) {
-					return item.Item._id === workItemId;
+					return item._id === workItemId;
 				});								
 			}
 			if(matchingItem){
