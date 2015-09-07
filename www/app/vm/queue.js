@@ -91,6 +91,7 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 			IsPolling : localStore.IsPolling,
 			Status : status,
 			viewErrors : function(workItem) {
+				console.log(workItem);
 				workItem.Errors = _.map(workItem.Errors, function(e){
 					e.error = e.error || { "status": "unknown", "responseText": "none"};
 					return e;
