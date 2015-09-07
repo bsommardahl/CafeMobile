@@ -34,18 +34,7 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 	};
 
 	var get = function(list, query) {
-		return _.find(list, query);
-		
-		// if (list.length == 0)
-		// 	return;
-
-		// var item = false;
-		// $.each(list || [], function() {
-		// 	if (query(this)) {
-		// 		item = this;
-		// 	}
-		// });
-		// return item;
+		return _.find(list, query);		
 	};
 
 	var queueKey = ":queue_pending";
@@ -95,27 +84,32 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 		splat : function(workItemId) {
 			//splat is what should happen after a work item is completely done
 
-			console.log("!! Preparing to splat working item: " + workItemId);
+			console.log("Preparing to splat working item: " + workItemId);
 
 			var keyForQueue = workingKey;
 			var items = getCollection(keyForQueue);
+			console.log("First item in working queue:");
 			console.log(items[0]);
 			console.log("Searching working queue for match...");
 			var matchingItem = get(items, function(item) {
 				return item.Item._id === workItemId;
 			});	
+			if(matchingItem){
+				console.log("Found matching work item in working queue!");
+			}
 
 			if(!matchingItem){
-				toastr.warning("Not found in working queue.");				
+				console.log("Not found in working queue.");				
 				keyForQueue = queueKey;
 				items = getCollection(keyForQueue);
-				console.log(items);		
-				console.log("Item count in pending queue: " + items.length);
-				console.log(items[0]);
-				
+				console.log("First item in pending queue:");
+				console.log(items[0]);				
 				matchingItem = get(items, function(item) {
 					return item.Item._id === workItemId;
 				});								
+			}
+			if(matchingItem){
+				console.log("Found matching work item in pending queue!");
 			}
 		
 			if(!matchingItem){
