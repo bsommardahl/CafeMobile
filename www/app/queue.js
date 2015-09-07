@@ -34,16 +34,18 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 	};
 
 	var get = function(list, query) {
-		if (list.length == 0)
-			return;
+		return _.find(list, query);
+		
+		// if (list.length == 0)
+		// 	return;
 
-		var item;
-		$.each(list || [], function() {
-			if (query(this)) {
-				item = this;
-			}
-		});
-		return item;
+		// var item = false;
+		// $.each(list || [], function() {
+		// 	if (query(this)) {
+		// 		item = this;
+		// 	}
+		// });
+		// return item;
 	};
 
 	var queueKey = ":queue_pending";
@@ -97,22 +99,23 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 
 			var keyForQueue = workingKey;
 			var items = getCollection(keyForQueue);
-			console.log(items);		
+			console.log(items[0]);
 			console.log("Searching working queue for match...");
 			var matchingItem = get(items, function(item) {
-				return item._id === workItemId;
+				return item.Item._id === workItemId;
 			});	
 
 			if(!matchingItem){
-				console.log("Item not found in working queue. Checking the pending queue...");
+				toastr.warning("Not found in working queue.");				
 				keyForQueue = queueKey;
 				items = getCollection(keyForQueue);
 				console.log(items);		
 				console.log("Item count in pending queue: " + items.length);
 				console.log(items[0]);
+				
 				matchingItem = get(items, function(item) {
-					return item._id === workItemId;
-				});				
+					return item.Item._id === workItemId;
+				});								
 			}
 		
 			if(!matchingItem){
