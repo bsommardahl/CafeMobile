@@ -47,8 +47,8 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 	};
 
 	var queueKey = ":queue_pending";
-	var workingKey = ":queue_working";
-
+	var workingKey = ":queue_working";	
+	
 	var queue = {
 		clear : function() {
 			store.setItem(queueKey, JSON.stringify([]));
@@ -91,30 +91,38 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 			return workItem;
 		},
 		splat : function(workItemId) {
-			console.log("Preparing to splat working item: " + workItemId);
-			
 			//splat is what should happen after a work item is completely done
-			var workingItems = getCollection(workingKey);
-			console.log("Total working items: " + workingItems.length);
-			
-			var workingItem = get(workingItems, function(item) {
-				return item._id == workItemId;
-			});
 
-			if(!workingItem){
+			console.log("Preparing to splat working item: " + workItemId);
+
+			var keyForQueue = workingKey;
+			var items = getCollection(keyForQueue);
+			var matchingItem = get(items, function(item) {
+				return item._id == id;
+			});	
+
+			if(!matchingItem){
+				var keyForQueue = queyeKey;
+				var items = getCollection(keyForQueue);
+				var matchingItem = get(items, function(item) {
+					return item._id == id;
+				});	
+			}
+		
+			if(!item){
 				alert("That work item was not found. No work was done.");
 				return;
 			}
 			
-			console.log("Found working item to splat: " + workingItem._id);
+			console.log("Found working item to splat: " + item._id);
 
 			//remove working item from working queue
-			var index = workingItems.indexOf(workingItem);
+			var index = items.indexOf(item);
 			console.log("Working item index: " + index);
-			workingItems.splice(index, 1);
-			console.log("Total working items: " + workingItems.length);
-			var newWorkingQueue = JSON.stringify(workingItems);
-			store.setItem(workingKey, newWorkingQueue);
+			items.splice(index, 1);
+			console.log("Total working items: " + items.length);
+			var newWorkingQueue = JSON.stringify(items);
+			store.setItem(keyForQueue, newWorkingQueue);
 			console.log("Working item removed: " + workItemId);			
 			onQueueChange();
 		},
