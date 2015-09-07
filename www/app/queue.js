@@ -97,7 +97,8 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 
 			var keyForQueue = workingKey;
 			var items = getCollection(keyForQueue);
-			console.log("Item count in working queue: " + items.length);		
+			console.log(items);		
+			console.log("Searching working queue for match...");
 			var matchingItem = get(items, function(item) {
 				return item._id === workItemId;
 			});	
@@ -106,6 +107,7 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 				console.log("Item not found in working queue. Checking the pending queue...");
 				keyForQueue = queueKey;
 				items = getCollection(keyForQueue);
+				console.log(items);		
 				console.log("Item count in pending queue: " + items.length);
 				console.log(items[0]);
 				matchingItem = get(items, function(item) {
@@ -114,7 +116,7 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 			}
 		
 			if(!matchingItem){
-				toast.error("That work item was not found. No work was done.");
+				toastr.error("That work item was not found. No work was done.");
 				return;
 			}
 			
