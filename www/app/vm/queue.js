@@ -26,7 +26,9 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 		var workingWorkItems = ko.observableArray();
 
 		var deleteWorkItem = function(workItem){			
+			console.log("arg:")
 			console.log(workItem);				
+			console.log("this:")
 			console.log(this);				
 			if(confirm("Are you sure you want to remove this work item? This action could corrupt your database.")){
 				var item = JSON.parse(workItem.Item);
