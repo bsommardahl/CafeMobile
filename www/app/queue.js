@@ -98,14 +98,14 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 			var keyForQueue = workingKey;
 			var items = getCollection(keyForQueue);
 			var matchingItem = get(items, function(item) {
-				return item._id == id;
+				return item._id == workItemId;
 			});	
 
 			if(!matchingItem){
 				var keyForQueue = queyeKey;
 				var items = getCollection(keyForQueue);
 				var matchingItem = get(items, function(item) {
-					return item._id == id;
+					return item._id == workItemId;
 				});	
 			}
 		
