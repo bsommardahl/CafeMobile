@@ -91,8 +91,9 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 			IsPolling : localStore.IsPolling,
 			Status : status,
 			viewErrors : function(workItem) {
-				workItem.Errors = _.filter(workItem.Errors, function(e){
-					return e.error;
+				workItem.Errors = _.map(workItem.Errors, function(e){
+					e.error = e.error || { "status": "unknown", "responseText": "none"};
+					return e;
 				});
 				dialog.Open("viewWorkItemErrors", workItem, {
 					title : "Work Item Errors"
