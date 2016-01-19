@@ -384,7 +384,11 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 			queue.splat(id);
 		},
 		ForceWorkItem: function(id){
-			processWorkItem(queue.getById(id));
+			var item = queue.getById(id);
+			console.log("Found item by id " + id);
+			console.log(JSON.stringify(item));
+			console.log("Forcing that item...");
+			processWorkItem(item);
 		},
 		Connect : connect,
 		Disconnect : disconnect,
