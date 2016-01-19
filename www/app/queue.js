@@ -41,9 +41,14 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 	var workingKey = ":queue_working";	
 	
 	var queue = {
-		getById : function(id){
-			var workItems = getCollection(queueKey);
-			return _.find(workItems, function(w){ return w._id === id; });
+		getById : function(workItemId){
+			var keyForQueue = workingKey;
+			var items = getCollection(keyForQueue);
+			var matchingItem = get(items, function(item) {
+				return item._id === workItemId;
+			});	
+			
+			return matchingItem;
 		},
 		clear : function() {
 			store.setItem(queueKey, JSON.stringify([]));
@@ -92,9 +97,6 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 
 			var keyForQueue = workingKey;
 			var items = getCollection(keyForQueue);
-			console.log("First item in working queue:");
-			console.log(items[0]);
-			console.log("Searching working queue for match...");
 			var matchingItem = get(items, function(item) {
 				return item._id === workItemId;
 			});	
