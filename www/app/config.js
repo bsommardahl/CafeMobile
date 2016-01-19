@@ -8,7 +8,7 @@
 		debugMode : true,
 		contentContainer : $("#content"),
 		//ApiUrl : "http://localhost:3001",
-		ApiUrl : "http://cafeserver.aws.af.cm",
+		ApiUrl : "https://gringo-cafe-server.herokuapp.com",
 		ViewPath : viewPath,
 		QueuePollingInterval : 10,
 		LocationId : "50cbae0243847a0000000001",

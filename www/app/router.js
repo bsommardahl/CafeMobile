@@ -1,5 +1,5 @@
-﻿define(["config", "vm/startOrder", "vm/orders", "vm/order", "vm/tags", "vm/sales", "vm/debits", "vm/items", "vm/employees", "vm/employee", "vm/item", "vm/queue", "vm/admin", "vm/hooks"], 
-function(config, startOrder, orders, order, tags, sales, debits, items, employees, employee, item, queue, admin, hooks) {
+﻿define(["config", "vm/startOrder", "vm/orders", "vm/order", "vm/tags", "vm/sales", "vm/debits", "vm/items", "vm/employees", "vm/employee", "vm/item", "vm/queue", "vm/admin", "vm/hooks", "vm/tags"], 
+function(config, startOrder, orders, order, tags, sales, debits, items, employees, employee, item, queue, admin, hooks, tags) {
 	var history = function(viewName, viewModel, showTitleBar) {
 		return {
 			ViewName : viewName,
@@ -22,17 +22,6 @@ function(config, startOrder, orders, order, tags, sales, debits, items, employee
 				ko.applyBindings(viewModel, $(div)[0]);
 			};
 
-			// if (showTitleBar) {
-			// titleBar.Show();
-			// } else {
-			// titleBar.Hide();
-			// }
-			//
-			// if(session.GetStatus().IsLoggedIn){
-			// navBar.Show();
-			// }else{
-			// navBar.Hide();
-			// }
 		});
 	};
 
@@ -67,6 +56,9 @@ function(config, startOrder, orders, order, tags, sales, debits, items, employee
 			ProductById : function(productId) {
 				var vm = item.NewInstance(productId);
 				displayView("item", vm);
+			},
+			Tags : function() {
+				displayView("tags", tags.NewInstance(), false);
 			},
 			Employees : function() {
 				displayView("employees", employees.NewInstance(), false);

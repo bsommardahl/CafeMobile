@@ -5,6 +5,10 @@ define(function() {
 			require("router").GoToView.Products();
 			return false;
 		},
+		GoToTags : function() {
+			require("router").GoToView.Tags();
+			return false;
+		},
 		GoToData : function() {
 			require("router").GoToView.Data();
 		},
