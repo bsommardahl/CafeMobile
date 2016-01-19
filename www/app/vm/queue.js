@@ -25,6 +25,13 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 
 		var workingWorkItems = ko.observableArray();
 
+		var forceWorkItem = function(workItem){			
+			if(confirm("Are you sure you want to force-process this work item? This action could corrupt your database.")){
+				localStore.ForceWorkItem(workItem._id);
+				getPendingWorkItems();
+			}
+		};
+		
 		var deleteWorkItem = function(workItem){			
 			console.log(workItem._id);				
 			if(confirm("Are you sure you want to remove this work item? This action could corrupt your database.")){
@@ -86,6 +93,7 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 			ClearQueue : function() {
 				localStore.ClearQueue();
 			},
+			forceWorkItem: forceWorkItem,
 			deleteWorkItem: deleteWorkItem,
 			IsConnected : localStore.IsConnected,
 			IsPolling : localStore.IsPolling,

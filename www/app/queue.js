@@ -41,6 +41,10 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 	var workingKey = ":queue_working";	
 	
 	var queue = {
+		getById : function(id){
+			var workItems = getCollection(queueKey);
+			return _.find(workItems, function(w){ return w._id === id; });
+		},
 		clear : function() {
 			store.setItem(queueKey, JSON.stringify([]));
 			store.setItem(workingKey, JSON.stringify([]));
@@ -171,100 +175,105 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 	};
 
 	var isProcessingItem = false;
+
 	var processNextWorkItem = function() {
 		if (!isProcessingItem) {
 			var next = queue.pop();
 			if (next) {
-				isProcessingItem = true;
-
-				var source = get(sources, function(source) {
-					return next.Collection == source.Key
-				});
-
-				if (!source) {
-					//let the item die
-					var msg = "No source for " + next.Collection + " was available to process the work item."
-					if (debugMode)
-						console.log(msg);	
-					queue.splat(next._id);				
-					isProcessingItem = false;
-				} else {
-					if (next.Type == "ADD") {
-						var restUrl = source.RestUrl;
-						remoteRepo.Post(restUrl, next.Item).done(function() {
-							if (debugMode) {
-								console.log("Item from work queue posted/created to remote repo.");
-								console.log(next.Item);
-							}
-							queue.splat(next._id);
-							isProcessingItem = false;
-						}).fail(function(err) {
-							queue.unPop(next._id, err);
-							isProcessingItem = false;
-						});
-					} else if (next.Type == "UPDATE") {
-						var restUrl = source.RestUrl;
-						remoteRepo.Put(restUrl, next.Item._id, next.Item).done(function() {
-							if (debugMode) {
-								console.log("Item from work queue put/updated item in remote repo.");
-								console.log(next.Item);
-							}
-							queue.splat(next._id);
-							isProcessingItem = false;
-						}).fail(function(err) {
-							queue.unPop(next._id, err);
-							isProcessingItem = false;
-						});
-					} else if (next.Type == "REMOVE") {
-						var restUrl = source.RestUrl;
-						remoteRepo.Delete(restUrl, next.Item._id).done(function() {
-							if (debugMode) {
-								console.log("Item from work queue deleted item from remote repo.");
-								console.log(next.Item);
-							}
-							queue.splat(next._id);
-							isProcessingItem = false;
-						}).fail(function(err) {
-							queue.unPop(next._id, err);
-							isProcessingItem = false;
-						});
-						isProcessingItem = false;
-					} else if (next.Type == "GETALL") {
-						var restUrl = source.RestUrl;
-						remoteRepo.Get(restUrl).done(function(result) {
-							var str = JSON.stringify(result);
-							store.setItem(source.Key, str);
-							if (debugMode) {
-								console.log(result.length + " items from remote resource " + source.RestUrl + " were imported into local collection " + source.Key + ".");
-							}
-							queue.splat(next._id);
-							isProcessingItem = false;
-						}).fail(function(err) {
-							queue.unPop(next._id, err);
-							isProcessingItem = false;
-						});
-					} else if (next.Type == "REMOVEALL") {
-						var restUrl = source.RestUrl;
-						remoteRepo.Delete(restUrl).done(function(result) {
-							if (debugMode) {
-								console.log("Remote resource " + source.RestUrl + " was cleared.");
-							}
-							queue.splat(next._id);
-							isProcessingItem = false;
-						}).fail(function(err) {
-							queue.unPop(next._id, err);
-							isProcessingItem = false;
-						});
-					} else {
-						var msg = "No handler for work item type " + next.Type + ".";
-						if (debugMode)
-							console.log(msg);
-						queue.unPop(next, msg);
-						isProcessingItem = false;
-					}
-				}
+				processWorkItem(next);
 				if (debugMode)
 					console.log("Pending queue now has " + queue.count() + " items.");
+			}
+		}
+	};
+
+	var processWorkItem  = function(next){
+		isProcessingItem = true;
+
+		var source = get(sources, function(source) {
+			return next.Collection == source.Key
+		});
+
+		if (!source) {
+			//let the item die
+			var msg = "No source for " + next.Collection + " was available to process the work item."
+			if (debugMode)
+				console.log(msg);	
+			queue.splat(next._id);				
+			isProcessingItem = false;
+		} else {
+			if (next.Type == "ADD") {
+				var restUrl = source.RestUrl;
+				remoteRepo.Post(restUrl, next.Item).done(function() {
+					if (debugMode) {
+						console.log("Item from work queue posted/created to remote repo.");
+						console.log(next.Item);
+					}
+					queue.splat(next._id);
+					isProcessingItem = false;
+				}).fail(function(err) {
+					queue.unPop(next._id, err);
+					isProcessingItem = false;
+				});
+			} else if (next.Type == "UPDATE") {
+				var restUrl = source.RestUrl;
+				remoteRepo.Put(restUrl, next.Item._id, next.Item).done(function() {
+					if (debugMode) {
+						console.log("Item from work queue put/updated item in remote repo.");
+						console.log(next.Item);
+					}
+					queue.splat(next._id);
+					isProcessingItem = false;
+				}).fail(function(err) {
+					queue.unPop(next._id, err);
+					isProcessingItem = false;
+				});
+			} else if (next.Type == "REMOVE") {
+				var restUrl = source.RestUrl;
+				remoteRepo.Delete(restUrl, next.Item._id).done(function() {
+					if (debugMode) {
+						console.log("Item from work queue deleted item from remote repo.");
+						console.log(next.Item);
+					}
+					queue.splat(next._id);
+					isProcessingItem = false;
+				}).fail(function(err) {
+					queue.unPop(next._id, err);
+					isProcessingItem = false;
+				});
+				isProcessingItem = false;
+			} else if (next.Type == "GETALL") {
+				var restUrl = source.RestUrl;
+				remoteRepo.Get(restUrl).done(function(result) {
+					var str = JSON.stringify(result);
+					store.setItem(source.Key, str);
+					if (debugMode) {
+						console.log(result.length + " items from remote resource " + source.RestUrl + " were imported into local collection " + source.Key + ".");
+					}
+					queue.splat(next._id);
+					isProcessingItem = false;
+				}).fail(function(err) {
+					queue.unPop(next._id, err);
+					isProcessingItem = false;
+				});
+			} else if (next.Type == "REMOVEALL") {
+				var restUrl = source.RestUrl;
+				remoteRepo.Delete(restUrl).done(function(result) {
+					if (debugMode) {
+						console.log("Remote resource " + source.RestUrl + " was cleared.");
+					}
+					queue.splat(next._id);
+					isProcessingItem = false;
+				}).fail(function(err) {
+					queue.unPop(next._id, err);
+					isProcessingItem = false;
+				});
+			} else {
+				var msg = "No handler for work item type " + next.Type + ".";
+				if (debugMode)
+					console.log(msg);
+				queue.unPop(next, msg);
+				isProcessingItem = false;
 			}
 		}
 	};
@@ -371,6 +380,9 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 		},
 		RemoveWorkItem: function(id){
 			queue.splat(id);
+		},
+		ForceWorkItem: function(id){
+			processWorkItem(queue.getById(id));
 		},
 		Connect : connect,
 		Disconnect : disconnect,
