@@ -151,8 +151,8 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 				list[index] = changedItem;
 				if (!skipQueue)
 					queue.Push("UPDATE", collection, changedItem);
-				if (debugMode)
-					console.log("Changed " + JSON.stringify(changedItem));
+				//if (debugMode)
+					console.log("Queued UPDATE " + JSON.stringify(changedItem));
 			}
 		});
 
@@ -263,15 +263,17 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 				console.log("Queueing " + source.Key + "...");
 				var col = getCollection(source.Key);
 				console.log(col.length + " items.");
+			
 				//put data from each source
 				$.each(col, function() {
 				 	var item = this;
-				 	console.log("Updating " + source.Key + " with " + JSON.stringify(item) + ".");
-				// 	update(source.Key, function(i) {
-				// 		return i._id == item._id;
-				// 	}, function() {
-				// 		return item
-				// 	});
+				 	update(source.Key, function(i) {
+				 		return i._id == item._id;
+				 	}, function() {
+				 		return item
+				 	}).done(function(){
+				 		console.log("Finished queuing update for " + item._id);
+				 	});
 				});
 			});
 
