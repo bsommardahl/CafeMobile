@@ -9,6 +9,7 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 				pendingWorkItems.removeAll();
 				$.each(list, function() {
 					pendingWorkItems.push({
+						_id : this._id,
 						Type : this.Type,
 						Collection : this.Collection,
 						Item : JSON.stringify(this.Item),
@@ -25,7 +26,9 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 
 		var workingWorkItems = ko.observableArray();
 
-		var forceWorkItem = function(workItem){		
+		var forceWorkItem = function(workItem){
+			if(!workItem) throw new Error("No work item was passed to the function 'forceWorkItem'.");
+
 			console.log("Waiting for user input to force-process work item.");	
 			if(confirm("Are you sure you want to force-process this work item? This action could corrupt your database.")){
 				console.log("Received order to force-process work item " + workItem._id);
@@ -48,6 +51,7 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 				workingWorkItems.removeAll();
 				$.each(list, function() {
 					workingWorkItems.push({
+						_id : this._id,
 						Type : this.Type,
 						Collection : this.Collection,
 						Item : JSON.stringify(this.Item),

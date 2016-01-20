@@ -385,8 +385,8 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 			queue.splat(id);
 		},
 		ForceWorkItem: function(id){
-			if(!id) throw new Error("'id' was undefined so cannot force the work item.");
-			
+			if(!id) throw new Error("The work item id was undefined so cannot force the work item.");
+
 			console.log("Forcing that item...");
 			var item = queue.getById(id);
 			if(item)
