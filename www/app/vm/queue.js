@@ -27,6 +27,8 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 
 		var forceWorkItem = function(workItem){			
 			if(confirm("Are you sure you want to force-process this work item? This action could corrupt your database.")){
+				console.log("Received order to force-process work item " + workitem._id);
+				console.log(workitem);
 				localStore.ForceWorkItem(workItem._id);
 				getPendingWorkItems();
 			}
