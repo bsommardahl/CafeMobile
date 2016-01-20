@@ -42,12 +42,13 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 	
 	var queue = {
 		getById : function(workItemId){
-			var keyForQueue = workingKey;
-			var items = getCollection(keyForQueue);
+			console.log("Getting work item by id...");
+			var items = getCollection(queueKey);
+			console.log("Found " + items.length + "...");
 			var matchingItem = get(items, function(item) {
 				return item._id === workItemId;
 			});	
-			
+			console.log(matchingItem);
 			return matchingItem;
 		},
 		clear : function() {
@@ -384,10 +385,10 @@ define(["bsonObjectId", "config", "remoteRepo"], function(bsonObjectId, config, 
 			queue.splat(id);
 		},
 		ForceWorkItem: function(id){
-			var item = queue.getById(id);
-			console.log("Found item by id " + id);
-			console.log(JSON.stringify(item));
 			console.log("Forcing that item...");
+			var item = queue.getById(id);
+			if(item)
+				console.log("Found item by id " + id);
 			processWorkItem(item);
 		},
 		Connect : connect,
