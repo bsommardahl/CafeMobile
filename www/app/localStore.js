@@ -140,7 +140,14 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 		return def;
 	};
 
+	function sleep(ms) {
+	  var e = new Date().getTime() + ms;
+	  while (new Date().getTime() <= e) {}
+	}
+	
 	var update = function(collection, query, changes, skipQueue) {
+		var def = $.Deferred();
+		
 		var list = getCollection(collection);
 		var changedItems = [];
 		console.log("Found " + list.length + " items in " + collection + ". Queueing updates...");
@@ -161,14 +168,15 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 		// if (changedItems.length == 0) {
 		// 	if (debugMode)
 		// 		console.log("No work done.");
-			return $.Deferred();
+			
 		// } else {
 		// 	var str = JSON.stringify(list);
 		// 	store.setItem(collection, str);
-		// 	var def = $.Deferred();
-		// 	def.resolve(changedItems);
-		// 	return def;
+		// 	def.resolve(changedItems);		
 		// }
+		dev.resolve();
+		if(col.length > 50) sleep(500);
+		return def;
 	};
 
 	var getAll = function(collection) {
@@ -273,7 +281,7 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 				 		return i._id === item._id;
 				 	}, function() {
 				 		return item;
-				 	});
+				 	});				 	
 				});
 			});
 
