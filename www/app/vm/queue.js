@@ -25,10 +25,11 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 
 		var workingWorkItems = ko.observableArray();
 
-		var forceWorkItem = function(workItem){			
+		var forceWorkItem = function(workItem){		
+			console.log("Waiting for user input to force-process work item.");	
 			if(confirm("Are you sure you want to force-process this work item? This action could corrupt your database.")){
-				console.log("Received order to force-process work item " + workitem._id);
-				console.log(workitem);
+				console.log("Received order to force-process work item " + workItem._id);
+				console.log(workItem);
 				localStore.ForceWorkItem(workItem._id);
 				getPendingWorkItems();
 			}
