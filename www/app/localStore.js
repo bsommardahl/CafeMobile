@@ -270,11 +270,9 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 				$.each(col, function() {
 				 	var item = this;
 				 	update(source.Key, function(i) {
-				 		return i._id == item._id;
+				 		return i._id === item._id;
 				 	}, function() {
-				 		return item
-				 	}).done(function(){
-				 		console.log("Finished queuing update for " + item._id);
+				 		return item;
 				 	});
 				});
 			});
