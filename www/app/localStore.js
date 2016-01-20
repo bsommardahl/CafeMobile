@@ -264,15 +264,15 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 				var col = getCollection(source.Key);
 				console.log(col.length + " items.");
 				//put data from each source
-				// $.each(col, function() {
-				// 	var item = this;
-				// 	console.log("Updating " + source.Key + " with " + JSON.stringify(item) + ".");
+				$.each(col, function() {
+				 	var item = this;
+				 	console.log("Updating " + source.Key + " with " + JSON.stringify(item) + ".");
 				// 	update(source.Key, function(i) {
 				// 		return i._id == item._id;
 				// 	}, function() {
 				// 		return item
 				// 	});
-				// });
+				});
 			});
 
 		},
