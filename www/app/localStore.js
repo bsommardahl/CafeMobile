@@ -331,6 +331,7 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 		ClearRemoteDatabase : function() {
 			var def = $.Deferred();
 			$.each(sources, function() {
+				console.log("Queue command to clear " + this.Key + ".");
 				removeAll(this.Key);
 			});
 			return def;

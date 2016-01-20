@@ -145,8 +145,10 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 
 			},
 			HardPush : function() {
-				localStore.ClearRemoteDatabase();
-				localStore.PushSync();
+				console.log("Command to hard push.");				
+				localStore.ClearRemoteDatabase().then(function(){
+					localStore.PushSync();
+				});
 			}
 		};
 	};
