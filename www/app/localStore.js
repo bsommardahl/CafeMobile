@@ -174,7 +174,7 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 		// 	store.setItem(collection, str);
 		// 	def.resolve(changedItems);		
 		// }
-		dev.resolve();
+		def.resolve();
 		if(col.length > 50) sleep(500);
 		return def;
 	};
