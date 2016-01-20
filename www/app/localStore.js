@@ -147,7 +147,7 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 		$.each(list, function() {
 			if (query(this)) {
 				console.log(this._id);
-				// var changedItem = changes(this);
+				var changedItem = changes(this);
 				// changedItems.push(changedItem);
 				// var index = list.indexOf(this);
 				// list[index] = changedItem;
