@@ -151,7 +151,10 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 		var list = getCollection(collection);
 		var changedItems = [];
 		console.log("Found " + list.length + " items in " + collection + ". Queueing updates...");
-		// $.each(list, function() {
+
+		//I'm removing code to see how far it gets on the ipad.
+
+		$.each(list, function() {
 		// 	if (query(this)) {
 		// 		console.log(this._id);
 		// 		var changedItem = changes(this);
@@ -163,19 +166,21 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 		// 			console.log("Queued UPDATE " + JSON.stringify(changedItem));
 		// 		}
 		// 	}
-		// });
 
-		// if (changedItems.length == 0) {
-		// 	if (debugMode)
-		// 		console.log("No work done.");
+			if(list.length > 50) sleep(500);
+		});
+
+		if (changedItems.length == 0) {
+		 	if (debugMode)
+		 		console.log("No work done.");
 			
-		// } else {
+		} else {
 		// 	var str = JSON.stringify(list);
 		// 	store.setItem(collection, str);
 		// 	def.resolve(changedItems);		
-		// }
+		}
+		//this needs to move to the above conditions.
 		def.resolve();
-		if(col.length > 50) sleep(500);
 		return def;
 	};
 
