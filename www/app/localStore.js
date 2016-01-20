@@ -261,18 +261,18 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 			$.each(sources, function() {
 				var source = this;
 				console.log("Queueing " + source.Key + "...");
-				var col = getCollection(source.Key);
-				console.log(col.length + " items.");
-				//put data from each source
-				$.each(col, function() {
-					var item = this;
-					console.log("Updating " + source.Key + " with " + JSON.stringify(item) + ".");
-					update(source.Key, function(i) {
-						return i._id == item._id;
-					}, function() {
-						return item
-					});
-				});
+				// var col = getCollection(source.Key);
+				// console.log(col.length + " items.");
+				// //put data from each source
+				// $.each(col, function() {
+				// 	var item = this;
+				// 	console.log("Updating " + source.Key + " with " + JSON.stringify(item) + ".");
+				// 	update(source.Key, function(i) {
+				// 		return i._id == item._id;
+				// 	}, function() {
+				// 		return item
+				// 	});
+				// });
 			});
 
 		},
