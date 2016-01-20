@@ -144,31 +144,31 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 		var list = getCollection(collection);
 		var changedItems = [];
 		console.log("Found " + list.length + " items in " + collection + ". Queueing updates...");
-		$.each(list, function() {
-			if (query(this)) {
-				console.log(this._id);
-				var changedItem = changes(this);
-				// changedItems.push(changedItem);
-				// var index = list.indexOf(this);
-				// list[index] = changedItem;
-				if (!skipQueue){
-					// queue.Push("UPDATE", collection, changedItem);
-					console.log("Queued UPDATE " + JSON.stringify(changedItem));
-				}
-			}
-		});
+		// $.each(list, function() {
+		// 	if (query(this)) {
+		// 		console.log(this._id);
+		// 		var changedItem = changes(this);
+		// 		// changedItems.push(changedItem);
+		// 		// var index = list.indexOf(this);
+		// 		// list[index] = changedItem;
+		// 		if (!skipQueue){
+		// 			// queue.Push("UPDATE", collection, changedItem);
+		// 			console.log("Queued UPDATE " + JSON.stringify(changedItem));
+		// 		}
+		// 	}
+		// });
 
-		if (changedItems.length == 0) {
-			if (debugMode)
-				console.log("No work done.");
+		// if (changedItems.length == 0) {
+		// 	if (debugMode)
+		// 		console.log("No work done.");
 			return $.Deferred();
-		} else {
-			var str = JSON.stringify(list);
-			store.setItem(collection, str);
-			var def = $.Deferred();
-			def.resolve(changedItems);
-			return def;
-		}
+		// } else {
+		// 	var str = JSON.stringify(list);
+		// 	store.setItem(collection, str);
+		// 	var def = $.Deferred();
+		// 	def.resolve(changedItems);
+		// 	return def;
+		// }
 	};
 
 	var getAll = function(collection) {
