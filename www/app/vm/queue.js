@@ -131,7 +131,7 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 
 				function make_base_auth(user, password) {
 				  var tok = user + ':' + password;
-				  var hash = Base64.encode(tok);
+				  var hash = btoa(tok);
 				  return "Basic " + hash;
 				}
 
