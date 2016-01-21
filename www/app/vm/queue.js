@@ -146,20 +146,22 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 					    url: 'https://api.mailgun.net/v3/' + domain + '/messages',
 					    type: 'POST',
 					    dataType: 'json',
-					    cache: false,
 					    data: {
 					    	from: 'Cafe <mailgun@' + domain + '>',					    	
 					    	to: toAddress,
 					    	subject: "Cafe Backup",
 					    	text: stringData
-					    }					    
-					})
-					.fail(function(jqXHR, status, err){
-			    		alert("Something went wrong while sending the email.");
-			    		throw new Error(err);
-					})
-					.done(function(){
-						alert("Email sent to sommardahl@gmail.com.");
+					    },
+					    success: function(){
+					    	alert("Email sent to sommardahl@gmail.com.");
+					    },
+					    error: function(jqXHR, status, err){
+						    alert("Something went wrong while sending the email.");
+				    		throw new Error(err);	
+					    },
+					    complete: function(){
+					    	alert("Complete")
+					    }
 					});
 				});				
 			},
