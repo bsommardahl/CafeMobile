@@ -287,6 +287,7 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 				 	}, function() {
 				 		return item;
 				 	});				 	
+				 	sleep(5000);
 				});
 			});
 
@@ -355,13 +356,7 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 
 			var def = $.Deferred();
 			var s = [];
-			var data = {
-				CafeBackup : {
-					Generated : moment()._d,
-					Sources : s
-				}
-			};
-
+			
 			$.each(sources, function() {
 				var col = getCollection(this.Key);
 				s.push({
@@ -370,15 +365,14 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 				});
 			});
 
-			s.push({
-				Collection : queueKey,
-				Data : getCollection(queueKey)
-			});
-
-			s.push({
-				Collection : workingKey,
-				Data : getCollection(workingKey)
-			});
+			var data = {
+				CafeBackup : {
+					Generated : moment()._d,
+					Collections : s,
+					PendingQueue: getCollection(queueKey),
+					WorkingQueue: getCollection(workingKey)
+				}
+			};
 
 			def.resolve(data);
 			return def;
