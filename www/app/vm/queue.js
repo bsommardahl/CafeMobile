@@ -149,14 +149,14 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 					    	to: toAddress,
 					    	subject: "Cafe Backup",
 					    	text: JSON.stringify(data)
-					    },
-					    success: function(){
-					    	alert("Email sent to sommardahl@gmail.com.");
-					    },
-					    error: function(jqXHR, status, err){
-				    		alert("Something went wrong while sending the email.");
-				    		throw new Error(err);
-					    }
+					    }					    
+					})
+					.fail(function(jqXHR, status, err){
+			    		alert("Something went wrong while sending the email.");
+			    		throw new Error(err);
+					})
+					.done(function(){
+						alert("Email sent to sommardahl@gmail.com.");
 					});
 				});				
 			},
