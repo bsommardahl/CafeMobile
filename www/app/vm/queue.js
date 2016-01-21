@@ -130,7 +130,7 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 				var toAddress = "sommardahl@gmail.com";
 
 				function make_base_auth(user, password) {
-				  var tok = user + ':' + pass;
+				  var tok = user + ':' + password;
 				  var hash = Base64.encode(tok);
 				  return "Basic " + hash;
 				}
