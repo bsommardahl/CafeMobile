@@ -137,21 +137,20 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 
 				localStore.GetAllData().done(function(data) {					
 
-					var stringData = JSON.stringify(data);					
 					$.ajax({
 						beforeSend: function (xhr) {
 						    xhr.setRequestHeader("Authorization", "Basic " + make_base_auth('api', key)); 
 						},
 					    url: 'https://api.mailgun.net/v3/' + domain + '/messages',
 					    type: 'POST',
-					    dataType: 'json',
-					    data: {
+					    contentType: "application/json",
+					    data: JSON.stringify({
 					    	from: 'Cafe <mailgun@' + domain + '>',					    	
 					    	to: toAddress,
 					    	subject: "Cafe Backup",
-					    	//text: stringData
+					    	//text: data
 					    	text: "hello"
-					    },
+					    }),
 					    success: function(){
 					    	alert("Email sent to sommardahl@gmail.com.");
 					    },
