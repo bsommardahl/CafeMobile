@@ -125,20 +125,31 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 
 			},
 			SendBackup: function(){
+				var domain = "appb4072e3f1d414f3f818f91c732703cee.mailgun.org";
+				var key = "key-857a62aaed82f21ea1760e2ca20ac7ed";
+				var toAddress = "sommardahl@gmail.com";
+
+				function make_base_auth(user, password) {
+				  var tok = user + ':' + pass;
+				  var hash = Base64.encode(tok);
+				  return "Basic " + hash;
+				}
+
 				localStore.GetAllData().done(function(data) {					
 					$.ajax({
-					    url: 'https://api.mailgun.net/v3/appb4072e3f1d414f3f818f91c732703cee.mailgun.org/messages',
+						beforeSend: function (xhr) {
+						    xhr.setRequestHeader("Authorization", "Basic " + make_base_auth('api', key)); 
+						}
+					    url: 'https://api.mailgun.net/v3/' + domain + '/messages',
 					    type: 'POST',
 					    dataType: 'json',
 					    cache: false,
 					    data: {
-					    	name: "Cafe",
-					    	email: "sommardahl@gmail.com",
-					    	subject: "backup",
-					    	message: JSON.stringify(data)
+					    	from: 'Cafe <mailgun@' + domain + '>',					    	
+					    	to: toAddress,
+					    	subject: "Cafe Backup",
+					    	text: JSON.stringify(data)
 					    },
-					    username:'api',
-					    password: 'key-857a62aaed82f21ea1760e2ca20ac7ed',
 					    success: function(){
 					    	alert("Email sent to sommardahl@gmail.com.");
 					    },
