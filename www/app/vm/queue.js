@@ -139,9 +139,9 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 
 					alert("Building payload...");
 					var ajaxPayload = {
-						beforeSend: function (xhr) {
-						    xhr.setRequestHeader("Authorization", "Basic " + make_base_auth('api', key)); 
-						},
+						// beforeSend: function (xhr) {
+						//     xhr.setRequestHeader("Authorization", "Basic " + make_base_auth('api', key)); 
+						// },
 					    url: 'https://api.mailgun.net/v3/' + domain + '/messages',
 					    type: 'POST',
 					    contentType: "application/json",
@@ -152,6 +152,8 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 					    	//text: data
 					    	text: "hello"
 					    }),
+					    username: 'api',
+					    password: key,
 					    success: function(){
 					    	alert("Email sent to sommardahl@gmail.com.");
 					    },
