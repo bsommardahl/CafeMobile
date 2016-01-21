@@ -365,6 +365,9 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 				});
 			});
 
+			var queueKey = ":queue_pending";
+			var workingKey = ":queue_working";
+			
 			var data = {
 				CafeBackup : {
 					Generated : moment()._d,
