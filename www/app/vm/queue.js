@@ -144,7 +144,7 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 						// },
 					    url: 'https://api.mailgun.net/v3/' + domain + '/messages',
 					    type: 'POST',
-					    dataType: 'json'
+					    dataType: 'json',
 					    data: {
 					    	from: 'Cafe <mailgun@' + domain + '>',					    	
 					    	to: toAddress,
