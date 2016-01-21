@@ -137,39 +137,28 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 
 				localStore.GetAllData().done(function(data) {					
 
-					alert("Building payload...");
 					var ajaxPayload = {
-						// beforeSend: function (xhr) {
-						//     xhr.setRequestHeader("Authorization", "Basic " + make_base_auth('api', key)); 
-						// },
-					    url: 'https://api.mailgun.net/v3/' + domain + '/messages',
+						url: 'http://emailer-3.apphb.com/mail',
 					    type: 'POST',
 					    dataType: 'json',
 					    data: {
-					    	from: 'Cafe <mailgun@' + domain + '>',					    	
-					    	to: toAddress,
-					    	subject: "Cafe Backup",
-					    	//text: data
-					    	text: "hello"
+					    	Name: 'Cafe',					    	
+					    	Email: 'cafe@no-reply.com',	
+					    	To: toAddress,
+					    	Project: "Cafe Backup",
+					    	Message: JSON.stringify(data)
 					    },
-					    username: 'api',
-					    password: key,
 					    success: function(){
-					    	alert("Email sent to sommardahl@gmail.com.");
+					    	alert("Email sent.");
+					    	console.log("Email sent to sommardahl@gmail.com.");
 					    },
 					    error: function(jqXHR, status, err){
-						    alert("Something went wrong while sending the email.");
-				    		throw new Error(err);	
-					    },
-					    complete: function(){
-					    	alert("Complete")
-					    }
+						    console.log("Something went wrong while sending the email.");
+				    		console.log(err);	
+					    }					   
 					};
 
-					alert("Sending payload...");
-					$.ajax(ajaxPayload);
-
-					alert("Payload sent.");
+					$.ajax(ajaxPayload);					
 				});				
 			},
 			// Restore : function() {
