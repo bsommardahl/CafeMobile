@@ -142,8 +142,9 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 					    success: function(){
 					    	alert("Email sent to sommardahl@gmail.com.");
 					    },
-					    error: function(){
+					    error: function(jqXHR, status, err){
 				    		alert("Something went wrong while sending the email.");
+				    		throw new Error(err);
 					    }
 					});
 				});				
