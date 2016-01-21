@@ -137,7 +137,8 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 
 				localStore.GetAllData().done(function(data) {					
 
-					$.ajax({
+					alert("Building payload...");
+					var ajaxPayload = {
 						beforeSend: function (xhr) {
 						    xhr.setRequestHeader("Authorization", "Basic " + make_base_auth('api', key)); 
 						},
@@ -161,7 +162,12 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 					    complete: function(){
 					    	alert("Complete")
 					    }
-					});
+					};
+
+					alert("Sending payload...");
+					$.ajax(ajaxPayload);
+
+					alert("Payload sent.");
 				});				
 			},
 			// Restore : function() {
