@@ -148,13 +148,13 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 	var update = function(collection, query, changes, skipQueue) {
 		var def = $.Deferred();
 		
-		var list = getCollection(collection);
+		//var list = getCollection(collection);
 		var changedItems = [];
-		console.log("Found " + list.length + " items in " + collection + ". Queueing updates...");
+		//console.log("Found " + list.length + " items in " + collection + ". Queueing updates...");
 
 		//I'm removing code to see how far it gets on the ipad.
 
-		$.each(list, function() {
+		//$.each(list, function() {
 		// 	if (query(this)) {
 		// 		console.log(this._id);
 		// 		var changedItem = changes(this);
@@ -167,8 +167,8 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 		// 		}
 		// 	}
 
-			if(list.length > 50) sleep(500);
-		});
+		//	if(list.length > 50) sleep(1000);
+		//});
 
 		if (changedItems.length == 0) {
 		 	if (debugMode)
