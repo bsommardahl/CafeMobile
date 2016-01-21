@@ -139,7 +139,7 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 					$.ajax({
 						beforeSend: function (xhr) {
 						    xhr.setRequestHeader("Authorization", "Basic " + make_base_auth('api', key)); 
-						}
+						},
 					    url: 'https://api.mailgun.net/v3/' + domain + '/messages',
 					    type: 'POST',
 					    dataType: 'json',
