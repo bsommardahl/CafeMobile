@@ -137,8 +137,7 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 
 				localStore.GetAllData().done(function(data) {					
 
-					var stringData = JSON.stringify(data);
-					alert("Sending " + stringData.length + " bytes of data...");
+					var stringData = JSON.stringify(data);					
 					$.ajax({
 						beforeSend: function (xhr) {
 						    xhr.setRequestHeader("Authorization", "Basic " + make_base_auth('api', key)); 
@@ -150,7 +149,8 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 					    	from: 'Cafe <mailgun@' + domain + '>',					    	
 					    	to: toAddress,
 					    	subject: "Cafe Backup",
-					    	text: stringData
+					    	//text: stringData
+					    	text: "hello"
 					    },
 					    success: function(){
 					    	alert("Email sent to sommardahl@gmail.com.");
