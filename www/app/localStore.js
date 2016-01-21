@@ -148,7 +148,7 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 	var update = function(collection, query, changes, skipQueue) {
 		var def = $.Deferred();
 		
-		//var list = getCollection(collection);
+		var list = getCollection(collection);
 		var changedItems = [];
 		//console.log("Found " + list.length + " items in " + collection + ". Queueing updates...");
 
