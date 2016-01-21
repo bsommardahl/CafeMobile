@@ -124,32 +124,56 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 				});
 
 			},
-			Restore : function() {
-				var data = ko.observable();
-				var onSuccess = function() {
-				};
-				var restoreVM = {
-					Data : data,
-					Restore : function() {
-						var json = JSON.parse(data());
-						localStore.Restore(json);
-						onSuccess();
-					},
-					OnSuccess : function(cb) {
-						onSuccess = cb;
-					}
-				};
-				dialog.Open("restore", restoreVM, {
-					title : "Restore Local Data"
-				});
-
+			SendBackup: function(){
+				localStore.GetAllData().done(function(data) {					
+					$.ajax({
+					    url: 'https://api.mailgun.net/v3/appb4072e3f1d414f3f818f91c732703cee.mailgun.org/messages',
+					    type: 'POST',
+					    dataType: 'json',
+					    cache: false,
+					    data: {
+					    	name: "Cafe",
+					    	email: "sommardahl@gmail.com",
+					    	subject: "backup",
+					    	message: JSON.stringify(data)
+					    },
+					    username:'api',
+					    password: 'key-857a62aaed82f21ea1760e2ca20ac7ed',
+					    success: function(){
+					    	alert("Email sent to sommardahl@gmail.com.");
+					    },
+					    error: function(){
+				    		alert("Something went wrong while sending the email.");
+					    }
+					});
+				});				
 			},
-			HardPush : function() {
-				console.log("Command to hard push.");				
-				//localStore.ClearRemoteDatabase().done(function(){
-					localStore.PushSync();
-				//});
-			}
+			// Restore : function() {
+			// 	var data = ko.observable();
+			// 	var onSuccess = function() {
+			// 	};
+			// 	var restoreVM = {
+			// 		Data : data,
+			// 		Restore : function() {
+			// 			var json = JSON.parse(data());
+			// 			localStore.Restore(json);
+			// 			onSuccess();
+			// 		},
+			// 		OnSuccess : function(cb) {
+			// 			onSuccess = cb;
+			// 		}
+			// 	};
+			// 	dialog.Open("restore", restoreVM, {
+			// 		title : "Restore Local Data"
+			// 	});
+
+			// },
+			// HardPush : function() {
+			// 	//console.log("Command to hard push.");				
+			// 	//localStore.ClearRemoteDatabase().done(function(){
+			// 		//localStore.PushSync();
+			// 	//});
+			// }
 		};
 	};
 
