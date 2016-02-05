@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/bsommardahl/CafeMobile#readme",
   "dependencies": {
-    "express": "^4.13.4",
     "node-static": "^0.7.7"
   }
 }
