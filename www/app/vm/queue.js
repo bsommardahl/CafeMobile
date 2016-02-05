@@ -148,13 +148,18 @@ define(["localStore", "dialog"], function(localStore, dialog) {
 					    	Project: "Cafe Backup",
 					    	Message: JSON.stringify(data)
 					    },
-					    success: function(){
+					    success: function(data, textStatus, jqXHR){
 					    	alert("Email sent.");
-					    	console.log("Email sent to sommardahl@gmail.com.");
+					    	console.log(textStatus);
+					    	console.log(data);
 					    },
 					    error: function(jqXHR, status, err){
 						    console.log("Something went wrong while sending the email.");
+				    		console.log(status);
 				    		console.log(err);	
+					    },
+					    complete: function(){
+					    	console.log("mail send complete.");
 					    }					   
 					};
 
