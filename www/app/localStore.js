@@ -150,37 +150,34 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 		
 		var list = getCollection(collection);
 		var changedItems = [];
-		//console.log("Found " + list.length + " items in " + collection + ". Queueing updates...");
+		console.log("Found " + list.length + " items in " + collection + ". Queueing updates...");
 
-		//I'm removing code to see how far it gets on the ipad.
+		$.each(list, function() {
+			if (query(this)) {
+				console.log(this._id);
+				var changedItem = changes(this);
+				changedItems.push(changedItem);
+				var index = list.indexOf(this);
+				list[index] = changedItem;
+				if (!skipQueue){
+					queue.Push("UPDATE", collection, changedItem);
+					console.log("Queued UPDATE " + JSON.stringify(changedItem));
+				}
+			}
 
-		//$.each(list, function() {
-		// 	if (query(this)) {
-		// 		console.log(this._id);
-		// 		var changedItem = changes(this);
-		// 		// changedItems.push(changedItem);
-		// 		// var index = list.indexOf(this);
-		// 		// list[index] = changedItem;
-		// 		if (!skipQueue){
-		// 			// queue.Push("UPDATE", collection, changedItem);
-		// 			console.log("Queued UPDATE " + JSON.stringify(changedItem));
-		// 		}
-		// 	}
-
-		//	if(list.length > 50) sleep(1000);
-		//});
+			if(list.length > 50) sleep(1000);
+		});
 
 		if (changedItems.length == 0) {
 		 	if (debugMode)
 		 		console.log("No work done.");
-			
+			def.resolve();
 		} else {
-		// 	var str = JSON.stringify(list);
-		// 	store.setItem(collection, str);
-		// 	def.resolve(changedItems);		
+			var str = JSON.stringify(list);
+			store.setItem(collection, str);
+			def.resolve(changedItems);		
 		}
-		//this needs to move to the above conditions.
-		def.resolve();
+		
 		return def;
 	};
 

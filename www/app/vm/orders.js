@@ -53,7 +53,8 @@
 			orders.removeAll();
 			dc.GetOpenOrders().done(function(listOfOrders) {
 				$.each(listOfOrders, function() {
-					orders.push(order.ExistingOrderObject(this));
+					if(this.Created)
+                        orders.push(order.ExistingOrderObject(this));
 				});
 			});
 		};

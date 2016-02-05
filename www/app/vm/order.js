@@ -255,7 +255,7 @@
 				amountPaid(orderObject.AmountPaid);
 				_id(orderObject._id);
 				items.removeAll();
-				$.each(orderObject.Items, function() {
+				$.each(orderObject.Items || [], function() {
 					items.push(new itemViewModel(this));
 				});
 			},
