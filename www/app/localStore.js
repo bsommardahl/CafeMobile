@@ -164,8 +164,6 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 					console.log("Queued UPDATE " + JSON.stringify(changedItem));
 				}
 			}
-
-			if(list.length > 50) sleep(1000);
 		});
 
 		if (changedItems.length == 0) {
@@ -283,8 +281,7 @@ define(["require", "bsonObjectId", "queue", "remoteRepo", "config"], function(re
 				 		return i._id === item._id;
 				 	}, function() {
 				 		return item;
-				 	});				 	
-				 	sleep(5000);
+				 	});				 					 	
 				});
 			});
 

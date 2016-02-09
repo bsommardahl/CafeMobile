@@ -33,8 +33,9 @@ define(["config"], function(config) {
 		return $.ajax({
 			url : config.ApiUrl + url,
 			dataType : "json",
+            contentType: "application/json",
 			type : type,
-			data : dataObj,
+			data : JSON.stringify(dataObj),
 		}).pipe(function(response, textStatus, jqXhr) {
 			var deferred = new $.Deferred();
 			if (response && response.Status == "error") {

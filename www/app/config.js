@@ -7,8 +7,8 @@
 	return {
 		debugMode : true,
 		contentContainer : $("#content"),
-		//ApiUrl : "http://10.0.1.122:3002",
-		ApiUrl : "https://gringo-cafe-server.herokuapp.com",
+		ApiUrl : "http://10.0.1.128:3002",
+		//ApiUrl : "https://gringo-cafe-server.herokuapp.com",
 		ViewPath : viewPath,
 		QueuePollingInterval : 10,
 		LocationId : "50cbae0243847a0000000001",
