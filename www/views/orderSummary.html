@@ -7,7 +7,19 @@
 		<table>
 			<tr>
 				<td> Created: </td>
-				<td><b><span data-bind="html: CreatedDate"></span></b></td>
+				<td>
+				<div data-bind="visible: !IsChangingCreatedDate(), click: ChangeCreatedDate">
+					<b><span data-bind="html: CreatedDate"></span></b>
+				</div>
+				<div data-bind="visible: IsChangingCreatedDate" style='display: none'>
+					<input data-bind="value: Created" style='width: 150px'/><br/>
+					<button data-bind="click: SaveCreatedDateChange">
+						Change
+					</button>
+					<button data-bind="click: CancelCreatedDateChange">
+						Cancel
+					</button>
+				</div></td>                
 			</tr>
 			<tr>
 				<td> Paid: </td>

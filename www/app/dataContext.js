@@ -173,6 +173,15 @@
 					return o;
 				});
 			},
+            ChangeCreatedDate : function(orderId, newDate) {
+				return local.Update("/orders", function(o) {
+					return o._id == orderId
+				}, function(o) {
+					console.log("changing created date for " + o._id);
+					o.Created = newDate
+					return o;
+				});
+			},
 		},
 		GetTags : function() {
 			return local.Query("/tags");

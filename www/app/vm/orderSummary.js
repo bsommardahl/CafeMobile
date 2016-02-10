@@ -64,7 +64,8 @@
 		var callback;
 
 		var isChangingPaidDate = ko.observable(false);
-
+        var isChangingCreatedDate = ko.observable(false);
+        
 		return {
 			Id : orderId,
 			CustomerName : customerName,
@@ -80,17 +81,30 @@
 				callback = callbackFromOutside;
 			},
 			IsChangingPaidDate : isChangingPaidDate,
+            IsChangingCreatedDate: isChangingCreatedDate,
 			SavePaidDateChange : function() {
 				dc.Orders.ChangePaidDate(orderId, paid()).done(function() {					
 					isChangingPaidDate(false);
 				});
 			},
+			SaveCreatedDateChange : function() {
+				dc.Orders.ChangeCreatedDate(orderId, created()).done(function() {					
+					isChangingCreatedDate(false);
+				});
+			},
 			CancelPaidDateChange : function() {
 				isChangingPaidDate(false);
 			},
+			CancelCreatedDateChange : function() {
+				isChangingCreatedDate(false);
+			},
 			Paid : paid,
+			Created : created,
 			ChangePaidDate : function() {
 				isChangingPaidDate(true);
+			},
+            ChangeCreatedDate : function() {
+				isChangingCreatedDate(true);
 			},
 			ReprintReceipt: printReceipt
 		};
