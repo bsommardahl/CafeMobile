@@ -30,13 +30,18 @@ define(["config"], function(config) {
 
 		var dataObj = ko.toJS(data || {});
 
-		return $.ajax({
+        var request = {
 			url : config.ApiUrl + url,
 			dataType : "json",
-            contentType: "application/json",
-			type : type,
-			data : JSON.stringify(dataObj),
-		}).pipe(function(response, textStatus, jqXhr) {
+        	type : type,
+		};
+        
+        if(type === "POST" || type === "PUT"){
+            request.contentType = "application/json";
+			request.data = JSON.stringify(dataObj);		
+        }
+        
+		return $.ajax(request).pipe(function(response, textStatus, jqXhr) {
 			var deferred = new $.Deferred();
 			if (response && response.Status == "error") {
 				toastr.error(response.Message, response.ErrorType);
